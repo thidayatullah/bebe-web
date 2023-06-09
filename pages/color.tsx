@@ -160,7 +160,16 @@ const ColorPage = () => {
           </VStack>
         </VStack>
 
-        <BottomMenu selectedIndex={0} />
+        <BottomMenu
+          selectedIndex={0}
+          onClick={(index) => {
+            if (index === 0) {
+              router.push("/color");
+            } else {
+              router.push("/color-quiz");
+            }
+          }}
+        />
       </Container>
     </>
   );

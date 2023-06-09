@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 export type BottomMenuProps = {
   selectedIndex: number;
-  onClick?: (index: number) => void;
+  onClick: (index: number) => void;
 };
 
 const BottomMenu = ({ selectedIndex, onClick, ...props }: BottomMenuProps) => {
@@ -32,7 +32,7 @@ const BottomMenu = ({ selectedIndex, onClick, ...props }: BottomMenuProps) => {
         flex="1"
         h="100%"
         onClick={() => {
-          router.push("/color");
+          onClick(0);
         }}
       >
         BELAJAR
@@ -43,7 +43,7 @@ const BottomMenu = ({ selectedIndex, onClick, ...props }: BottomMenuProps) => {
         flex="1"
         h="100%"
         onClick={() => {
-          router.push("/color-quiz");
+          onClick(1);
         }}
       >
         KUIS

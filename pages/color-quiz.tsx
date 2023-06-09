@@ -8,6 +8,7 @@ import {
   useDisclosure,
   Button,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import BottomMenu from "../components/bottomMenu";
 import { useEffect, useState } from "react";
 import ColorTile from "../components/colorTile";
@@ -35,6 +36,8 @@ const ColorQuizPage = () => {
   const redAudioPath = "/sounds/red.mp3";
   const whiteAudioPath = "/sounds/white.mp3";
   const yellowAudioPath = "/sounds/yellow.mp3";
+
+  const router = useRouter();
 
   const [questions, setQuestions] = useState([
     "purple",
@@ -333,7 +336,16 @@ const ColorQuizPage = () => {
             </ModalContent>
           </Modal>
         )}
-        <BottomMenu selectedIndex={1} />
+        <BottomMenu
+          selectedIndex={1}
+          onClick={(index) => {
+            if (index === 0) {
+              router.push("/color");
+            } else {
+              router.push("/color-quiz");
+            }
+          }}
+        />
       </Container>
     </>
   );
