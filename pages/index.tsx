@@ -69,15 +69,11 @@ const IndexPage = () => {
                 transform: "scale(0.98)",
               }}
               onClick={() => {
-                toast({
-                  title: `Segera Hadir`,
-                  status: "info",
-                  isClosable: true,
-                });
+                router.push("/animal");
               }}
             >
               <HStack spacing="4">
-                <Image src="/images/tiger.png" w="64px" alt="tiger"></Image>
+                <Image src="/images/cat.png" w="64px" alt="tiger"></Image>
                 <Text color="white" fontWeight="700" textAlign="left">
                   SUARA HEWAN
                 </Text>
