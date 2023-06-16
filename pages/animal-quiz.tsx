@@ -40,6 +40,20 @@ const AnimalQuizPage = () => {
     onOpen();
   };
 
+  const [questions, setQuestions] = useState([
+    "cat",
+    "cow",
+    "horse",
+    "bird",
+    "dog",
+    "goat",
+    "frog",
+    "rooster",
+    "duck",
+  ]);
+
+  const [currentQuestionIndex, setCurrenQuestionIndex] = useState(0);
+
   const [tiles, setTiles] = useState([
     {
       id: "cat",
@@ -87,7 +101,7 @@ const AnimalQuizPage = () => {
     },
   ]);
 
-  const [shouldShuffle, setShouldShuffle] = useState(false);
+  const [shouldShuffleTiles, setShouldShuffleTiles] = useState(false);
 
   const [clickedTile, setClickedTile] = useState({
     id: "",
@@ -95,12 +109,17 @@ const AnimalQuizPage = () => {
   });
 
   const handleTopButtonClicked = () => {
-    setShouldShuffle(!shouldShuffle);
+    playQuestionSound();
+  };
+
+  const playQuestionSound = () => {
+    console.log("/sounds/animals/" + questions[currentQuestionIndex] + ".wav");
+    playSound("/sounds/animals/" + questions[currentQuestionIndex] + ".wav");
   };
 
   useEffect(() => {
     setTiles(tiles.sort(() => Math.random() - 0.5));
-  }, [shouldShuffle, tiles]);
+  }, [shouldShuffleTiles, tiles]);
 
   const generateTiles = (forRow: number) => {
     let rowTiles = tiles.slice(0, 3);
