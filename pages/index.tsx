@@ -75,7 +75,7 @@ const IndexPage = () => {
               <HStack spacing="4">
                 <Image src="/images/cat.png" w="64px" alt="tiger"></Image>
                 <Text color="white" fontWeight="700" textAlign="left">
-                  SUARA HEWAN
+                  MENGENAL HEWAN
                 </Text>
               </HStack>
             </Box>
