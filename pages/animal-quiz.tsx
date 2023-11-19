@@ -12,7 +12,7 @@ import ImageTile from "../components/imageTile";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import BackButton from "@/components/backButton";
-import DetailModal from "@/components/detailModal";
+import EvaluateAnswerModal from "@/components/evaluateAnswerModal";
 
 const AnimalQuizPage = () => {
   const questionAudioPath = "/sounds/color-question-main.mp3";
@@ -31,25 +31,16 @@ const AnimalQuizPage = () => {
     sound.currentTime = 0;
   };
 
-  const handleTileClick = (id: string, soundFileDuration: number) => {
-    //punculin modal
-    setClickedTile({
-      id: id,
-      soundFileDuration: soundFileDuration,
-    });
-    onOpen();
-  };
-
   const [questions, setQuestions] = useState([
-    "cat",
-    "cow",
-    "horse",
-    "bird",
-    "dog",
-    "goat",
-    "frog",
-    "rooster",
-    "duck",
+    "cat-question",
+    "cow-question",
+    "horse-question",
+    "bird-question",
+    "dog-question",
+    "goat-question",
+    "frog-question",
+    "rooster-question",
+    "duck-question",
   ]);
 
   const [currentQuestionIndex, setCurrenQuestionIndex] = useState(0);
@@ -101,25 +92,46 @@ const AnimalQuizPage = () => {
     },
   ]);
 
+  useEffect(() => {
+    playQuestionSound();
+  }, []);
+
   const [shouldShuffleTiles, setShouldShuffleTiles] = useState(false);
 
-  const [clickedTile, setClickedTile] = useState({
-    id: "",
-    soundFileDuration: 0,
-  });
+  const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
 
   const handleTopButtonClicked = () => {
     playQuestionSound();
   };
 
   const playQuestionSound = () => {
-    console.log("/sounds/animals/" + questions[currentQuestionIndex] + ".wav");
-    playSound("/sounds/animals/" + questions[currentQuestionIndex] + ".wav");
+    playSound(
+      "/sounds/animals/questions/" + questions[currentQuestionIndex] + ".mp3"
+    );
+  };
+
+  const handleCloseEvaluationModal = () => {
+    onClose();
+    playQuestionSound();
   };
 
   useEffect(() => {
     setTiles(tiles.sort(() => Math.random() - 0.5));
   }, [shouldShuffleTiles, tiles]);
+
+  const handleAnswerClick = (name: string) => {
+    if (name + "-question" === questions[currentQuestionIndex]) {
+      console.log("hawaban benar");
+      setCurrenQuestionIndex(currentQuestionIndex + 1);
+      setTiles(tiles.sort(() => Math.random() - 0.5));
+      setIsCorrectAnswer(true);
+      onOpen();
+    } else {
+      console.log("jawaban salah");
+      setIsCorrectAnswer(false);
+      onOpen();
+    }
+  };
 
   const generateTiles = (forRow: number) => {
     let rowTiles = tiles.slice(0, 3);
@@ -132,11 +144,10 @@ const AnimalQuizPage = () => {
     return rowTiles.map((item, i) => {
       return (
         <ImageTile
-          key={i}
           id={item.id}
           soundFileDuration={item.soundFileDuration}
           onClick={(id, soundFileDuration) => {
-            handleTileClick(id, soundFileDuration ?? 0);
+            handleAnswerClick(id);
           }}
         />
       );
@@ -190,12 +201,10 @@ const AnimalQuizPage = () => {
           </VStack>
         </VStack>
         {isOpen && (
-          <DetailModal
+          <EvaluateAnswerModal
             isOpen={isOpen}
-            id={clickedTile.id}
-            onClose={onClose}
-            shouldPlaySound={true}
-            soundFileDuration={clickedTile.soundFileDuration}
+            onClose={handleCloseEvaluationModal}
+            isCorrectAnswer={isCorrectAnswer}
           />
         )}
         <BottomMenu

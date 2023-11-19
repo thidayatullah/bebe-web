@@ -27,7 +27,7 @@ const DetailModal = (props: DetailModalProps) => {
     setCanCloseModal(false);
 
     if (props.shouldPlaySound === true) {
-      playSound("/sounds/animals/" + props.id + ".wav");
+      playSound("/sounds/animals/" + props.id + ".mp3");
     } else {
       setCanCloseModal(true);
     }

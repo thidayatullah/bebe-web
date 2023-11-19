@@ -151,6 +151,10 @@ const ColorQuizPage = () => {
     sound.currentTime = 0;
   };
 
+  useEffect(() => {
+    playQuestionSound();
+  }, []);
+
   const handleAnswerClick = (name: string) => {
     if (name === questions[currentQuestionIndex]) {
       playCorrectAnswerSound();

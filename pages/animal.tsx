@@ -43,47 +43,47 @@ const AnimalPage = () => {
   const [tiles, setTiles] = useState([
     {
       id: "cat",
-      soundFileDuration: 3100,
+      soundFileDuration: 3500,
     },
 
     {
       id: "cow",
-      soundFileDuration: 2100,
+      soundFileDuration: 3250,
     },
 
     {
       id: "horse",
-      soundFileDuration: 3000,
+      soundFileDuration: 3300,
     },
 
     {
       id: "bird",
-      soundFileDuration: 2100,
+      soundFileDuration: 3100,
     },
 
     {
       id: "dog",
-      soundFileDuration: 2100,
+      soundFileDuration: 2700,
     },
 
     {
       id: "goat",
-      soundFileDuration: 1100,
+      soundFileDuration: 2320,
     },
 
     {
       id: "frog",
-      soundFileDuration: 2100,
+      soundFileDuration: 3250,
     },
 
     {
       id: "rooster",
-      soundFileDuration: 4100,
+      soundFileDuration: 4500,
     },
 
     {
       id: "duck",
-      soundFileDuration: 1100,
+      soundFileDuration: 2250,
     },
   ]);
 
