@@ -92,6 +92,10 @@ const AnimalQuizPage = () => {
     },
   ]);
 
+  useEffect(() => {
+    playQuestionSound();
+  }, []);
+
   const [shouldShuffleTiles, setShouldShuffleTiles] = useState(false);
 
   const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
