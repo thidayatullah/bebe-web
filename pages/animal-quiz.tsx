@@ -144,6 +144,7 @@ const AnimalQuizPage = () => {
     return rowTiles.map((item, i) => {
       return (
         <ImageTile
+          key={item.id}
           id={item.id}
           soundFileDuration={item.soundFileDuration}
           onClick={(id, soundFileDuration) => {

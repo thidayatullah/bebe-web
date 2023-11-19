@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 export type EvaluateAnswerModalProps = {
   isOpen: boolean;
   isCorrectAnswer: boolean;
-  onClose?: () => void;
+  onClose: () => void;
 };
 
 const EvaluateAnswerModal = (props: EvaluateAnswerModalProps) => {
