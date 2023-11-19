@@ -37,6 +37,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.2.5"],\
           ["@types/react", "npm:18.2.8"],\
           ["@types/react-dom", "npm:18.2.4"],\
+          ["@vercel/analytics", "npm:1.1.1"],\
           ["eslint", "npm:8.42.0"],\
           ["eslint-config-next", "virtual:78224da977baaa6dba37a1172789eaad658670c9839100c2e6a11098bcbae143086e97ba7fa371166e56aba9fd4ad5e36cf56e21bca8d1ccabc4f53ae7a9088b#npm:13.4.4"],\
           ["framer-motion", "virtual:78224da977baaa6dba37a1172789eaad658670c9839100c2e6a11098bcbae143086e97ba7fa371166e56aba9fd4ad5e36cf56e21bca8d1ccabc4f53ae7a9088b#npm:6.5.1"],\
@@ -3217,6 +3218,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@vercel/analytics", [\
+      ["npm:1.1.1", {\
+        "packageLocation": "../../../.yarn/berry/cache/@vercel-analytics-npm-1.1.1-b56890c746-10c0.zip/node_modules/@vercel/analytics/",\
+        "packageDependencies": [\
+          ["@vercel/analytics", "npm:1.1.1"],\
+          ["server-only", "npm:0.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@zag-js/dom-query", [\
       ["npm:0.16.0", {\
         "packageLocation": "../../../.yarn/berry/cache/@zag-js-dom-query-npm-0.16.0-906053010b-10c0.zip/node_modules/@zag-js/dom-query/",\
@@ -3533,6 +3544,7 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:20.2.5"],\
           ["@types/react", "npm:18.2.8"],\
           ["@types/react-dom", "npm:18.2.4"],\
+          ["@vercel/analytics", "npm:1.1.1"],\
           ["eslint", "npm:8.42.0"],\
           ["eslint-config-next", "virtual:78224da977baaa6dba37a1172789eaad658670c9839100c2e6a11098bcbae143086e97ba7fa371166e56aba9fd4ad5e36cf56e21bca8d1ccabc4f53ae7a9088b#npm:13.4.4"],\
           ["framer-motion", "virtual:78224da977baaa6dba37a1172789eaad658670c9839100c2e6a11098bcbae143086e97ba7fa371166e56aba9fd4ad5e36cf56e21bca8d1ccabc4f53ae7a9088b#npm:6.5.1"],\
@@ -6206,6 +6218,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["semver", "npm:7.5.4"],\
           ["lru-cache", "npm:6.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["server-only", [\
+      ["npm:0.0.1", {\
+        "packageLocation": "../../../.yarn/berry/cache/server-only-npm-0.0.1-24bf42bde2-10c0.zip/node_modules/server-only/",\
+        "packageDependencies": [\
+          ["server-only", "npm:0.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\

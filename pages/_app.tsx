@@ -5,6 +5,7 @@ import theme from "../lib/theme";
 import "@fontsource/raleway/400.css";
 import "@fontsource/open-sans/700.css";
 import "@fontsource/bayon";
+import { Analytics } from "@vercel/analytics/react";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -18,6 +19,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           />
         </Head>
         <Component {...pageProps} />;
+        <Analytics />
       </>
     </ChakraProvider>
   );
