@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import BottomMenu from "../components/bottomMenu";
 import { useEffect, useState } from "react";
-import ImageTile from "../components/imageTile";
+import TextTile from "@/components/textTile";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import BackButton from "@/components/backButton";
@@ -42,48 +42,44 @@ const NumbersPage = () => {
 
   const [tiles, setTiles] = useState([
     {
-      id: "cat",
-      soundFileDuration: 3500,
+      id: "1",
+      title: "1",
     },
-
     {
-      id: "cow",
-      soundFileDuration: 3250,
+      id: "2",
+      title: "2",
     },
-
     {
-      id: "horse",
-      soundFileDuration: 3300,
+      id: "3",
+      title: "3",
     },
-
     {
-      id: "bird",
-      soundFileDuration: 3100,
+      id: "4",
+      title: "4",
     },
-
     {
-      id: "dog",
-      soundFileDuration: 2700,
+      id: "5",
+      title: "5",
     },
-
     {
-      id: "goat",
-      soundFileDuration: 2320,
+      id: "6",
+      title: "6",
     },
-
     {
-      id: "frog",
-      soundFileDuration: 3250,
+      id: "7",
+      title: "7",
     },
-
     {
-      id: "rooster",
-      soundFileDuration: 4500,
+      id: "8",
+      title: "8",
     },
-
     {
-      id: "duck",
-      soundFileDuration: 2250,
+      id: "9",
+      title: "9",
+    },
+    {
+      id: "10",
+      title: "10",
     },
   ]);
 
@@ -98,31 +94,35 @@ const NumbersPage = () => {
     setShouldShuffle(!shouldShuffle);
   };
 
-  useEffect(() => {
-    setTiles(tiles.sort(() => Math.random() - 0.5));
-  }, [shouldShuffle, tiles]);
-
-  const generateTiles = (forRow: number) => {
-    let rowTiles = tiles.slice(0, 3);
-    if (forRow === 2) {
-      rowTiles = tiles.slice(3, 6);
-    } else if (forRow === 3) {
-      rowTiles = tiles.slice(6, 9);
-    }
-
-    return rowTiles.map((item, i) => {
-      return (
-        <ImageTile
+  const generateTiles = (start: number, end: number) => {
+    var tiles = [];
+    for (let i = start; i <= end; i++) {
+      tiles.push(
+        <TextTile
           key={i}
-          id={item.id}
-          soundFileDuration={item.soundFileDuration}
-          onClick={(id, soundFileDuration) => {
-            handleTileClick(id, soundFileDuration ?? 0);
-          }}
+          id={i.toString()}
+          title={i.toString()}
+          onClick={(id) => {}}
         />
       );
-    });
+    }
+    return tiles;
+
+    // return rowTiles.map((item, i) => {
+    //   return (
+    //     <TextTile
+    //       key={i}
+    //       id={item.id}
+    //       title={item.title}
+    //       onClick={(id) => {}}
+    //     />
+    //   );
+    // });
   };
+
+  // useEffect(() => {
+  //   setTiles(tiles.sort(() => Math.random() - 0.5));
+  // }, [shouldShuffle, tiles]);
 
   return (
     <>
@@ -164,10 +164,11 @@ const NumbersPage = () => {
           >
             <Image src="/images/shuffle.png" alt="Shuffle" objectFit="fill" />
           </Box>
-          <VStack height="full" flex="1">
-            <HStack>{generateTiles(1)}</HStack>
-            <HStack>{generateTiles(2)}</HStack>
-            <HStack>{generateTiles(3)}</HStack>
+          <VStack height="full" flex="1" spacing={4}>
+            <HStack spacing={6}>{generateTiles(1, 3)}</HStack>
+            <HStack spacing={6}>{generateTiles(4, 6)}</HStack>
+            <HStack spacing={6}>{generateTiles(7, 9)}</HStack>
+            <HStack spacing={6}>{generateTiles(10, 10)}</HStack>
           </VStack>
         </VStack>
         {isOpen && (
@@ -183,9 +184,9 @@ const NumbersPage = () => {
           selectedIndex={0}
           onClick={(index) => {
             if (index === 0) {
-              router.push("/animal");
+              router.push("/numbers");
             } else {
-              router.push("/animal-quiz");
+              router.push("/numbers-quiz");
             }
           }}
         />

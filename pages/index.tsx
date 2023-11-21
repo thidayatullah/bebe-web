@@ -91,7 +91,7 @@ const IndexPage = () => {
                 transform: "scale(0.98)",
               }}
               onClick={() => {
-                router.push("/animal");
+                router.push("/numbers");
               }}
             >
               <HStack spacing="4">
