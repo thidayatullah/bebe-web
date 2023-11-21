@@ -102,7 +102,9 @@ const NumbersPage = () => {
           key={i}
           id={i.toString()}
           title={i.toString()}
-          onClick={(id) => {}}
+          onClick={(id) => {
+            playSound("/sounds/numbers/" + id + ".mp3");
+          }}
         />
       );
     }
@@ -144,27 +146,8 @@ const NumbersPage = () => {
       >
         <VStack spacing="4">
           <BackButton />
-          <Box
-            width="80px"
-            bg="purple.400"
-            shadow="md"
-            height="20"
-            borderRadius="full"
-            alignContent="center"
-            padding="2"
-            border="2px"
-            borderColor="blackAlpha.200"
-            _active={{
-              bg: "purple.500",
-              transform: "scale(0.98)",
-            }}
-            onClick={() => {
-              handleTopButtonClicked();
-            }}
-          >
-            <Image src="/images/shuffle.png" alt="Shuffle" objectFit="fill" />
-          </Box>
-          <VStack height="full" flex="1" spacing={4}>
+
+          <VStack height="full" flex="1" spacing={4} paddingTop="20">
             <HStack spacing={6}>{generateTiles(1, 3)}</HStack>
             <HStack spacing={6}>{generateTiles(4, 6)}</HStack>
             <HStack spacing={6}>{generateTiles(7, 9)}</HStack>
