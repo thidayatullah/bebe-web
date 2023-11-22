@@ -9,8 +9,8 @@ const theme = extendTheme({
   textStyles: {
     textTile: {
       fontSize: "6xl",
-      fontWeight: "bold",
-      fontFamily: "Bayon",
+      fontWeight: "500",
+      fontFamily: "Playpen Sans",
     },
   },
 });

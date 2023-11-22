@@ -6,10 +6,12 @@ import "@fontsource/raleway/400.css";
 import "@fontsource/open-sans/700.css";
 import "@fontsource/bayon";
 import { Analytics } from "@vercel/analytics/react";
+import Fonts from "../lib/Fonts";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider theme={theme}>
+      <Fonts />
       <>
         <Head>
           <title>Bebe - Teman Bermain & Belajar</title>
