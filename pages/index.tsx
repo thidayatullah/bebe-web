@@ -91,11 +91,7 @@ const IndexPage = () => {
                 transform: "scale(0.98)",
               }}
               onClick={() => {
-                toast({
-                  title: `Segera Hadir`,
-                  status: "info",
-                  isClosable: true,
-                });
+                router.push("/numbers");
               }}
             >
               <HStack spacing="4">
