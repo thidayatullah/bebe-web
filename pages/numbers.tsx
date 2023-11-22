@@ -102,6 +102,7 @@ const NumbersPage = () => {
           key={i}
           id={i.toString()}
           title={i.toString()}
+          bgColor="#FF55BB"
           onClick={(id) => {
             playSound("/sounds/numbers/" + id + ".mp3");
           }}

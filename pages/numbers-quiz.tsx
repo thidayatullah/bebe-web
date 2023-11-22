@@ -8,11 +8,12 @@ import {
 } from "@chakra-ui/react";
 import BottomMenu from "../components/bottomMenu";
 import { useEffect, useState } from "react";
-import ImageTile from "../components/imageTile";
+// import ImageTile from "../components/imageTile";
+import TextTile from "@/components/textTile";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import BackButton from "@/components/backButton";
-import DetailModal from "@/components/detailModal";
+import EvaluateAnswerModal from "@/components/evaluateAnswerModal";
 
 const NumbersQuizPage = () => {
   const questionAudioPath = "/sounds/color-question-main.mp3";
@@ -31,76 +32,99 @@ const NumbersQuizPage = () => {
     sound.currentTime = 0;
   };
 
-  const handleTileClick = (id: string, soundFileDuration: number) => {
-    //punculin modal
-    setClickedTile({
-      id: id,
-      soundFileDuration: soundFileDuration,
-    });
-    onOpen();
-  };
+  const [questions, setQuestions] = useState([
+    "1-question",
+    "7-question",
+    "4-question",
+    "2-question",
+    "9-question",
+    "6-question",
+    "3-question",
+    "8-question",
+    "5-question",
+    "10-question",
+  ]);
+
+  const [currentQuestionIndex, setCurrenQuestionIndex] = useState(0);
 
   const [tiles, setTiles] = useState([
     {
-      id: "cat",
-      soundFileDuration: 3500,
+      id: "1",
     },
 
     {
-      id: "cow",
-      soundFileDuration: 3250,
+      id: "7",
     },
 
     {
-      id: "horse",
-      soundFileDuration: 3300,
+      id: "4",
+    },
+    {
+      id: "2",
     },
 
     {
-      id: "bird",
-      soundFileDuration: 3100,
+      id: "9",
     },
 
     {
-      id: "dog",
-      soundFileDuration: 2700,
+      id: "6",
     },
 
     {
-      id: "goat",
-      soundFileDuration: 2320,
+      id: "3",
     },
 
     {
-      id: "frog",
-      soundFileDuration: 3250,
+      id: "8",
     },
 
     {
-      id: "rooster",
-      soundFileDuration: 4500,
+      id: "5",
     },
-
     {
-      id: "duck",
-      soundFileDuration: 2250,
+      id: "10",
     },
   ]);
 
-  const [shouldShuffle, setShouldShuffle] = useState(false);
+  useEffect(() => {
+    playQuestionSound();
+  }, []);
 
-  const [clickedTile, setClickedTile] = useState({
-    id: "",
-    soundFileDuration: 0,
-  });
+  const [shouldShuffleTiles, setShouldShuffleTiles] = useState(false);
+
+  const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
 
   const handleTopButtonClicked = () => {
-    setShouldShuffle(!shouldShuffle);
+    playQuestionSound();
+  };
+
+  const playQuestionSound = () => {
+    playSound(
+      "/sounds/numbers/questions/" + questions[currentQuestionIndex] + ".mp3"
+    );
+  };
+
+  const handleCloseEvaluationModal = () => {
+    onClose();
+    playQuestionSound();
   };
 
   useEffect(() => {
     setTiles(tiles.sort(() => Math.random() - 0.5));
-  }, [shouldShuffle, tiles]);
+  }, [shouldShuffleTiles, tiles]);
+
+  const handleAnswerClick = (name: string) => {
+    if (name + "-question" === questions[currentQuestionIndex]) {
+      setCurrenQuestionIndex(currentQuestionIndex + 1);
+      setTiles(tiles.sort(() => Math.random() - 0.5));
+      setIsCorrectAnswer(true);
+      onOpen();
+    } else {
+      setIsCorrectAnswer(false);
+      onOpen();
+    }
+  };
 
   const generateTiles = (forRow: number) => {
     let rowTiles = tiles.slice(0, 3);
@@ -108,17 +132,18 @@ const NumbersQuizPage = () => {
       rowTiles = tiles.slice(3, 6);
     } else if (forRow === 3) {
       rowTiles = tiles.slice(6, 9);
+    } else if (forRow === 4) {
+      rowTiles = tiles.slice(9, 10);
     }
 
     return rowTiles.map((item, i) => {
       return (
-        <ImageTile
-          key={i}
+        <TextTile
+          key={item.id}
           id={item.id}
-          soundFileDuration={item.soundFileDuration}
-          onClick={(id, soundFileDuration) => {
-            handleTileClick(id, soundFileDuration ?? 0);
-          }}
+          title={item.id}
+          bgColor="#FF55BB"
+          onClick={handleAnswerClick}
         />
       );
     });
@@ -162,30 +187,30 @@ const NumbersQuizPage = () => {
               handleTopButtonClicked();
             }}
           >
-            <Image src="/images/shuffle.png" alt="Shuffle" objectFit="fill" />
+            <Image src="/images/speak.png" alt="Speak" objectFit="fill" />
           </Box>
-          <VStack height="full" flex="1">
-            <HStack>{generateTiles(1)}</HStack>
-            <HStack>{generateTiles(2)}</HStack>
-            <HStack>{generateTiles(3)}</HStack>
+          <VStack height="full" flex="1" spacing={4}>
+            <HStack spacing={6}>{generateTiles(1)}</HStack>
+            <HStack spacing={6}>{generateTiles(2)}</HStack>
+            <HStack spacing={6}>{generateTiles(3)}</HStack>
+            <HStack spacing={6}>{generateTiles(4)}</HStack>
           </VStack>
         </VStack>
         {isOpen && (
-          <DetailModal
+          <EvaluateAnswerModal
             isOpen={isOpen}
-            id={clickedTile.id}
-            onClose={onClose}
-            shouldPlaySound={true}
-            soundFileDuration={clickedTile.soundFileDuration}
+            onClose={handleCloseEvaluationModal}
+            isCorrectAnswer={isCorrectAnswer}
+            voice="anizah"
           />
         )}
         <BottomMenu
-          selectedIndex={0}
+          selectedIndex={1}
           onClick={(index) => {
             if (index === 0) {
-              router.push("/animal");
+              router.push("/numbers");
             } else {
-              router.push("/animal-quiz");
+              router.push("/numbers-quiz");
             }
           }}
         />
@@ -194,4 +219,4 @@ const NumbersQuizPage = () => {
   );
 };
 
-export default NumbersPage;
+export default NumbersQuizPage;

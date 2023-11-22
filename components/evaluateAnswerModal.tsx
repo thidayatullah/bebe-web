@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 export type EvaluateAnswerModalProps = {
   isOpen: boolean;
   isCorrectAnswer: boolean;
+  voice?: string;
   onClose: () => void;
 };
 
@@ -28,11 +29,19 @@ const EvaluateAnswerModal = (props: EvaluateAnswerModalProps) => {
   };
 
   const playCorrectAnswerSound = () => {
-    playSound("/sounds/answer-correct.mp3");
+    if (props.voice == "anizah") {
+      playSound("/sounds/" + props.voice + "/answer-correct.mp3");
+    } else {
+      playSound("/sounds/answer-correct.mp3");
+    }
   };
 
   const playWrongAnswerSound = () => {
-    playSound("/sounds/answer-wrong.mp3");
+    if (props.voice == "anizah") {
+      playSound("/sounds/" + props.voice + "/answer-wrong.mp3");
+    } else {
+      playSound("/sounds/answer-wrong.mp3");
+    }
   };
 
   const evaluateAnswer = () => {
